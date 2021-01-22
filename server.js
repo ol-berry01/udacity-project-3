@@ -32,3 +32,12 @@ app.listen(port, () => {
 app.get("/allweather", (req, res) => {
   res.send(projectData)
 })
+
+// POST route
+app.post("/addWeather", (req, res) => {
+  res.send(projectData)
+  projectData.temp = req.body.temp
+  projectData.date = req.body.date
+  projectData.feelings = req.body.feelings
+  console.log(projectData)
+})

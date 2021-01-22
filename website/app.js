@@ -22,9 +22,15 @@ generateBtn.addEventListener("click", e => {
   //   console.log(`Test: ${newDate}, ${newZip}, ${newFeelings}`)
 
   getWeather(baseUrl, newZip, secretKey).then(weatherData => {
-    date.innerHTML = `${newDate}`
-    temp.innerHTML = `${Math.round(weatherData.main.temp - 273.15)}&deg;C`
-    content.innerHTML = `Entry: ${newFeelings}`
+    // date.innerHTML = `${newDate}`
+    // temp.innerHTML = `${Math.round(weatherData.main.temp - 273.15)}&deg;C`
+    // content.innerHTML = `Entry: ${newFeelings}`
+
+    postWeather("/addWeather", {
+      date: newDate,
+      temp: weatherData.main.temp,
+      feelings: newFeelings
+    })
   })
 })
 
@@ -36,5 +42,23 @@ const getWeather = async (url, zip, key) => {
     return weatherData
   } catch (err) {
     console.log("error:", err)
+  }
+}
+
+const postWeather = async (url = "", data = {}) => {
+  const response = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+
+  try {
+    const newEntry = await response.json()
+    return newEntry
+  } catch (error) {
+    console.log("Error: ", error)
   }
 }
