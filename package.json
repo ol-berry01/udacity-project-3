@@ -1,0 +1,15 @@
+{
+  "name": "udacity-project-3",
+  "version": "1.0.0",
+  "description": "Project 3: Weather Journal App - Udacity Front End Developer Nano-Degree Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
