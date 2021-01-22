@@ -29,7 +29,7 @@ app.listen(port, () => {
 })
 
 // GET route
-app.get("/allweather", (req, res) => {
+app.get("/allWeather", (req, res) => {
   res.send(projectData)
 })
 
@@ -39,5 +39,5 @@ app.post("/addWeather", (req, res) => {
   projectData.temp = req.body.temp
   projectData.date = req.body.date
   projectData.feelings = req.body.feelings
-  console.log(projectData)
+  //   console.log(projectData)
 })

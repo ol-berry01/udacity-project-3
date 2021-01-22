@@ -30,7 +30,7 @@ generateBtn.addEventListener("click", e => {
       date: newDate,
       temp: weatherData.main.temp,
       feelings: newFeelings
-    })
+    }).then(updateJournal())
   })
 })
 
@@ -58,6 +58,20 @@ const postWeather = async (url = "", data = {}) => {
   try {
     const newEntry = await response.json()
     return newEntry
+  } catch (error) {
+    console.log("Error: ", error)
+  }
+}
+
+const updateJournal = async () => {
+  const response = await fetch("/allWeather")
+  console.log(response)
+
+  try {
+    const newJournal = await response.json()
+    date.innerHTML = `Date: ${newJournal.date}`
+    temp.innerHTML = `Temp: ${Math.round(newJournal.temp - 273.15)}&deg;C`
+    content.innerHTML = `Feelings: ${newJournal.Feelings}`
   } catch (error) {
     console.log("Error: ", error)
   }
