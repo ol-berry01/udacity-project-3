@@ -19,5 +19,22 @@ generateBtn.addEventListener("click", e => {
   const newZip = zipCode.value
   const newFeelings = feelings.value
 
-  console.log(`Test: ${newDate}, ${newZip}, ${newFeelings}`)
+  //   console.log(`Test: ${newDate}, ${newZip}, ${newFeelings}`)
+
+  getWeather(baseUrl, newZip, secretKey).then(weatherData => {
+    date.innerHTML = `${newDate}`
+    temp.innerHTML = `${Math.round(weatherData.main.temp - 273.15)}&deg;C`
+    content.innerHTML = `Entry: ${newFeelings}`
+  })
 })
+
+const getWeather = async (url, zip, key) => {
+  const response = await fetch(`${url}${zip},us&appid=${key}`)
+
+  try {
+    const weatherData = await response.json()
+    return weatherData
+  } catch (err) {
+    console.log("error:", err)
+  }
+}
