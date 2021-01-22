@@ -27,3 +27,8 @@ const port = 8080
 app.listen(port, () => {
   console.log("server running on localhost, port:", port)
 })
+
+// GET route
+app.get("/allweather", (req, res) => {
+  res.send(projectData)
+})
